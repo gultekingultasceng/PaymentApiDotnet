@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 
+      POSTGRES_USER: user
+      POSTGRES_DB: paymentdb
+    ports:
+      - "5432:5432"
+
+  rabbitmq:
+    image: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
