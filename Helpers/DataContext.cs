@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PaymentAPI.Models;
+using PaymentApiDotnet.Entities;
 
 namespace PaymentApiDotnet.Helpers
 {
@@ -18,6 +18,6 @@ namespace PaymentApiDotnet.Helpers
             options.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
         }
 
-        public DbSet<CardOwner> CardOwners { get; set; }
+        public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
     }
 }
