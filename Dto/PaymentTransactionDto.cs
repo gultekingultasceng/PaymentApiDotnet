@@ -1,7 +1,6 @@
 ﻿
 using PaymentApiDotnet.Models;
 using System.ComponentModel.DataAnnotations;
-using static PaymentApiDotnet.Enums.PaymentTypes;
 
 namespace PaymentApiDotnet.Dto
 {
@@ -15,7 +14,8 @@ namespace PaymentApiDotnet.Dto
         public string SurName { get; set; }
         public string ExpDate { get; set; }
         public string Cvc { get; set; }
-        public string PaymentType { get; }
+        public string BankName { get; }
+        public string CardType { get; }
 
 
         public PaymentTransactionDto(PaymentTransaction paymentTransaction)
@@ -28,7 +28,8 @@ namespace PaymentApiDotnet.Dto
             SurName = paymentTransaction.SurName;   
             ExpDate = paymentTransaction.ExpDate;
             Cvc = paymentTransaction.Cvc;
-            PaymentType = paymentTransaction.PaymentType;
+            BankName = paymentTransaction.BankName;
+            CardType = paymentTransaction.CardType;
             
         }
     }

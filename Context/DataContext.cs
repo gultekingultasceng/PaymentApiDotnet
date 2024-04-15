@@ -5,15 +5,13 @@ namespace PaymentApiDotnet.Context
 {
     public class DataContext : DbContext
     {
-
-       // protected readonly IConfiguration Configuration;
-
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-            //Configuration = configuration;
+            
         }
       
 
         public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
+        public DbSet<Bin> Bins { get; set; }
     }
 }

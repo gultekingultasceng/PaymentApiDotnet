@@ -23,7 +23,8 @@ namespace PaymentApiDotnet.Migrations
                     SurName = table.Column<string>(type: "text", nullable: false),
                     ExpDate = table.Column<string>(type: "text", nullable: false),
                     Cvc = table.Column<string>(type: "text", nullable: false),
-                    PaymentType = table.Column<string>(type: "text", nullable: false)
+                    BankName = table.Column<string>(type: "text", nullable: false),
+                    CardType = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

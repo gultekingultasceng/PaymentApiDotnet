@@ -24,7 +24,9 @@ namespace PaymentApiDotnet.Models
         [Required]
         public string Cvc { get; set; }
         [Required]
-        public string PaymentType { get; set; }
+        public string BankName { get; set; }
+        [Required]
+        public string CardType { get; set; }
 
     }
 }

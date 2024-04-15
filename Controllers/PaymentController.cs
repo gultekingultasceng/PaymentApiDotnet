@@ -21,7 +21,7 @@ namespace PaymentApiDotnet.Controllers
         [HttpPost(Name = "Pay")]
         public IActionResult MakePayment([FromBody] PaymentRequestDto paymentRequestDto)
         {
-            return StatusCode(201,_paymentService.ProcessPayment(paymentRequestDto));
+            return StatusCode(201, _paymentService.ProcessPayment(paymentRequestDto));
         }
     }
 }

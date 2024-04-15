@@ -12,10 +12,17 @@ namespace PaymentApiDotnet.Repository
         {
             _dataContext = dataContext;
         }
-        public async Task AddTransaction(PaymentTransaction payment)
+        public void AddTransaction(PaymentTransaction payment)
         {
-            await _dataContext.PaymentTransactions.AddAsync(payment);
-            await _dataContext.SaveChangesAsync();
+             _dataContext.PaymentTransactions.Add(payment);
+             _dataContext.SaveChanges();
+        }
+
+        public Bin GetBankInfosByCardNumber(string cardNumber)
+        {
+            int binNumber = int.Parse(cardNumber.Substring(0, 6));
+            var binInfo = _dataContext.Bins.FirstOrDefault(pt => pt.BinNumber == binNumber); // FirstOrDefaultAsync yerine FirstOrDefault kullanılır.
+            return binInfo;
         }
     }
 }

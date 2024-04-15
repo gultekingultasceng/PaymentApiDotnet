@@ -4,6 +4,7 @@ namespace PaymentApiDotnet.Repository
 {
     public interface IPaymentRepository
     {
-        Task AddTransaction(PaymentTransaction payment);
+        void AddTransaction(PaymentTransaction payment);
+        Bin GetBankInfosByCardNumber(string cardNumber);
     }
 }

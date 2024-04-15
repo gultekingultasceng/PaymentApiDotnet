@@ -1,6 +1,5 @@
 ﻿using CheckDigits.Net.GeneralAlgorithms;
 using System;
-using PaymentApiDotnet.Utils;
 using System.ComponentModel.DataAnnotations;
 
 namespace PaymentApiDotnet
@@ -13,7 +12,6 @@ namespace PaymentApiDotnet
         public string SurName { get; set; }
         public string ExpDate { get; set; }
         public string Cvc { get; set; }
-        public string PaymentType { get; }
 
         public CreditCard(string cardNumber, string name, string surName, string expDate, string cvc)
         {
@@ -22,12 +20,7 @@ namespace PaymentApiDotnet
             SurName = surName;
             ExpDate = expDate;
             Cvc = cvc;
-            PaymentType = getCardType();
-        }
 
-        private string getCardType()
-        {
-            return CardTypeInfo.GetCardType(CardNumber).ToString();
         }
     }
 }

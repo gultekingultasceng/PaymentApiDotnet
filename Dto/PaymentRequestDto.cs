@@ -1,8 +1,6 @@
 ﻿namespace PaymentApiDotnet.Dto
 {
-    using PaymentApiDotnet.Utils;
     using System.ComponentModel.DataAnnotations;
-    using static PaymentApiDotnet.Enums.PaymentTypes;
 
     public class PaymentRequestDto
     {
@@ -28,11 +26,7 @@
         [StringLength(3)]
         public string Cvc { get; set; }
 
-        private PaymentType PaymentType => CardTypeInfo.GetCardType(CardNumber);
-        public string GetPaymentType()
-        {
-            return PaymentType.ToString();
-        }
+       
 
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using PaymentApiDotnet;
-using PaymentApiDotnet.Utils;
 namespace PaymentApiDemo.Dto
 {
     public class PaymentResponseDto

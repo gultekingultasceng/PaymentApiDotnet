@@ -18,13 +18,14 @@ namespace PaymentApiDotnet.IoC
             services.AddScoped<IBankFactory, BankFactory>();
             services.AddTransient<PaymentTransactionService>();
             services.AddTransient<DataContext>();
-            services.AddScoped<MastercardService>();
-            services.AddScoped<VisaService>();
-            services.AddScoped<AmexService>();
-            services.AddScoped<JcbService>();
-            services.AddScoped<EnrouteService>();
-            services.AddScoped<DiscoverService>();
-            services.AddScoped<DinersClubService>();
+            services.AddScoped<VakıfBankService>();
+            services.AddScoped<HalkBankService>();
+            services.AddScoped<ZiraatService>();
+            services.AddScoped<GarantiService>();
+            services.AddScoped<TEBService>();
+            services.AddScoped<SekerbankService>();
+            services.AddScoped<AkbankService>();
+            services.AddScoped<IsBankService>();
 
         }
     }

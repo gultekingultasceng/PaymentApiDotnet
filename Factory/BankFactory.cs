@@ -1,31 +1,33 @@
-﻿using PaymentApiDotnet.Enums;
-using PaymentApiDotnet.Services.BankServices;
+﻿using PaymentApiDotnet.Services.BankServices;
 using PaymentApiDotnet.Services.BankServices.Base;
 using System.Reflection.PortableExecutable;
-using static PaymentApiDotnet.Enums.PaymentTypes;
 
 namespace PaymentApiDotnet.Factory
 {
     public class BankFactory : IBankFactory
     {
-        private Dictionary<PaymentType, IBankService> _bankServiceByPaymentType;
+        private Dictionary<string, IBankService> _bankServiceByPaymentType;
 
-        public BankFactory(AmexService amexService ,DinersClubService dinersClubService, DiscoverService discoverService , EnrouteService enrouteService, JcbService jcbService, MastercardService mastercardService, VisaService visaService)
+        public BankFactory(ZiraatService ziraatService ,AkbankService akbankService,
+            SekerbankService sekerbankService , TEBService tebService,
+            GarantiService garantiService, VakıfBankService vakıfBankService,
+            HalkBankService halkBankService , IsBankService isbankService)
         {
             _bankServiceByPaymentType = new()
         {
-            { PaymentType.Amex, amexService },
-            { PaymentType.DinersClub, dinersClubService },
-            { PaymentType.Discover, discoverService },
-            { PaymentType.enRoute, enrouteService },
-            { PaymentType.JCB, jcbService },
-            { PaymentType.MasterCard, mastercardService },
-            { PaymentType.VISA,visaService },
+            { "T.C. ZİRAAT BANKASI A.Ş.", ziraatService },
+            { "AKBANK T.A.Ş.", akbankService },
+            { "ŞEKERBANK T.A.Ş.", sekerbankService },
+            { "TÜRK EKONOMİ BANKASI A.Ş.", tebService },
+            { "T. GARANTİ BANKASI A.Ş.", garantiService },
+            { "T. VAKIFLAR BANKASI T.A.O.", vakıfBankService },
+            { "T. HALK BANKASI A.Ş.",halkBankService },
+            { "T. İŞ BANKASI A.Ş.",isbankService }
         };
         }
-        public IBankService GetBankServiceByPaymentType(PaymentType paymentType)
+        public IBankService GetBankServiceByPaymentType(string bankName)
         {
-            return _bankServiceByPaymentType[paymentType];
+            return _bankServiceByPaymentType[bankName];
         }
     }
 }

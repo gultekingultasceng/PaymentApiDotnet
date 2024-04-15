@@ -13,7 +13,7 @@ namespace PaymentApiDotnet.Services
         {
             _paymentRepository = paymentRepository;
         }
-        public void CreatePaymentTransactionFromPaymentRequest(PaymentRequestDto paymentRequestDto , bool paymentStatus)
+        public void CreatePaymentTransactionFromPaymentRequest(PaymentRequestDto paymentRequestDto ,Bin binInfo, bool paymentStatus)
         {
             PaymentTransaction paymentTransaction = new PaymentTransaction();
             paymentTransaction.Amount = paymentRequestDto.Amount;
@@ -23,10 +23,10 @@ namespace PaymentApiDotnet.Services
             paymentTransaction.Name = paymentRequestDto.Name;
             paymentTransaction.SurName = paymentRequestDto.Surname;
             paymentTransaction.ExpDate = paymentRequestDto.ExpDate;
-            paymentTransaction.PaymentType = paymentRequestDto.GetPaymentType();
             paymentTransaction.PaymentStatus = paymentStatus;
-
-            _paymentRepository.AddTransaction(paymentTransaction);
+            paymentTransaction.BankName = binInfo.BankName;
+            paymentTransaction.CardType = binInfo.CardType;
+             _paymentRepository.AddTransaction(paymentTransaction);
            
         }
     }
