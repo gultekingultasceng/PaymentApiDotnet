@@ -1,5 +1,5 @@
 ﻿using System;
-using PaymentApiDotnet.Models;
+using PaymentApiDotnet;
 using PaymentApiDotnet.Utils;
 namespace PaymentApiDemo.Dto
 {

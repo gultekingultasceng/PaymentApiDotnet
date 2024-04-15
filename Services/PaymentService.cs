@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Primitives;
-using PaymentAPI.Models;
 using PaymentApiDemo.Dto;
 using PaymentApiDotnet.Dto;
 using PaymentApiDotnet.Factory;

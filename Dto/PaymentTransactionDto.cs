@@ -1,5 +1,4 @@
-﻿using PaymentAPI.Models;
-using PaymentApiDotnet.Entities;
+﻿
 using PaymentApiDotnet.Models;
 using System.ComponentModel.DataAnnotations;
 using static PaymentApiDotnet.Enums.PaymentTypes;

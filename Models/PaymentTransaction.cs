@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using PaymentAPI.Models;
-using PaymentApiDotnet.Models;
 
-namespace PaymentApiDotnet.Entities
+
+namespace PaymentApiDotnet.Models
 {
     public class PaymentTransaction
     {
@@ -25,7 +24,7 @@ namespace PaymentApiDotnet.Entities
         [Required]
         public string Cvc { get; set; }
         [Required]
-        public string PaymentType { get; }
+        public string PaymentType { get; set; }
 
     }
 }
