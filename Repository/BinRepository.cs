@@ -10,11 +10,12 @@ namespace PaymentApiDotnet.Repository
         {
             _dataContext = dataContext;
         }
-        public Bin GetBankInfosByCardNumber(string cardNumber)
+        public Bin? GetBankInfosByCardNumber(string cardNumber)
         {
             int binNumber = int.Parse(cardNumber.Substring(0, 6));
-            var binInfo = _dataContext.Bins.FirstOrDefault(pt => pt.BinNumber == binNumber); // FirstOrDefaultAsync yerine FirstOrDefault kullanılır.
-            return binInfo;
+            return !string.IsNullOrEmpty(cardNumber) ? (from bin in _dataContext.Bins
+                                                        where bin.BinNumber == binNumber
+                                                        select bin).FirstOrDefault() : null;
         }
     }
 }

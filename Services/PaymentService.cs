@@ -4,6 +4,7 @@ using PaymentApiDotnet.Dto;
 using PaymentApiDotnet.Factory;
 using PaymentApiDotnet.Models;
 using PaymentApiDotnet.RabbitMq;
+using PaymentApiDotnet.RabbitMq.latest;
 using PaymentApiDotnet.Repository;
 using PaymentApiDotnet.Services.Base;
 using System;
@@ -14,14 +15,16 @@ namespace PaymentApiDotnet.Services
     {
         private readonly IBankFactory _bankFactory;
         private readonly IBinRepository _binRepository;
-        private readonly PaymentEventProducerRabbitmq _paymentEventProducerRabbitmq;
+        //private readonly PaymentEventProducerRabbitmq _paymentEventProducerRabbitmq;
+        private readonly IProducerService _producerService;
        
-        public PaymentService(IBankFactory bankFactory , IBinRepository binRepository, PaymentEventProducerRabbitmq paymentEventProducerRabbitmq)
+        public PaymentService(IBankFactory bankFactory , IBinRepository binRepository, IProducerService producerService)// PaymentEventProducerRabbitmq paymentEventProducerRabbitmq)
         {
 
             _bankFactory = bankFactory;
             _binRepository = binRepository;
-            _paymentEventProducerRabbitmq = paymentEventProducerRabbitmq;
+            _producerService = producerService;
+           // _paymentEventProducerRabbitmq = paymentEventProducerRabbitmq;
           
             
         }
@@ -30,14 +33,16 @@ namespace PaymentApiDotnet.Services
 
         public PaymentResponseDto ProcessPayment(PaymentRequestDto paymentRequestDto)
         {
-              var binInfo = _binRepository.GetBankInfosByCardNumber(paymentRequestDto.CardNumber);
+           
+            var binInfo = _binRepository.GetBankInfosByCardNumber(paymentRequestDto.CardNumber);
             var releatedBankService = _bankFactory.GetBankServiceByPaymentType(binInfo.BankName);
             try
             {
                PaymentResponseDto response =  releatedBankService.ProcessPayment(paymentRequestDto, binInfo);
                if (!response.PaymentStatus)
                 {
-                    _paymentEventProducerRabbitmq.SendMessage(paymentRequestDto);
+                    _producerService.SendMessage(paymentRequestDto);
+                   /// _paymentEventProducerRabbitmq.SendMessage(paymentRequestDto);
                 }
                 return response;
             }
