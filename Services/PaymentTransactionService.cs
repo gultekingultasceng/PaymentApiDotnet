@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using PaymentApiDotnet.Dto;
 using PaymentApiDotnet.Models;
 using PaymentApiDotnet.Repository;
@@ -19,10 +21,14 @@ namespace PaymentApiDotnet.Services
         public void CreatePaymentTransactionFromPaymentRequest(PaymentRequestDto paymentRequestDto ,Bin binInfo, bool paymentStatus)
         {
             PaymentTransaction paymentTransaction = _mapper.Map<PaymentTransaction>(paymentRequestDto);
+            _mapper.Map(binInfo, paymentTransaction);
             paymentTransaction.PaymentStatus = paymentStatus;
-            paymentTransaction.BankName = binInfo.BankName;
-            paymentTransaction.CardType = binInfo.CardType;
              _paymentRepository.AddTransaction(paymentTransaction);
+        }
+
+        public List<PaymentTransaction> GetTransactionsByBankCode(int bankCode)
+        {
+            return _paymentRepository.GetTransactionsByBankCode(bankCode);
         }
     }
 }

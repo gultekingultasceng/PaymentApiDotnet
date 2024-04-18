@@ -17,7 +17,11 @@ namespace PaymentApiDotnet.Repository
              _dataContext.PaymentTransactions.Add(payment);
              _dataContext.SaveChanges();
         }
-
-
+        public List<PaymentTransaction> GetTransactionsByBankCode(int bankCode)
+        {
+            return _dataContext.PaymentTransactions
+               .Where(p => p.BankCode.Equals(bankCode))
+               .ToList();
+        }
     }
 }

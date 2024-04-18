@@ -17,6 +17,7 @@ namespace PaymentApiDotnet.Dto
         public string BankName { get; }
         public string CardType { get; }
 
+        public int BankCode { get; set; }
 
         public PaymentTransactionDto(PaymentTransaction paymentTransaction)
         {
@@ -30,7 +31,9 @@ namespace PaymentApiDotnet.Dto
             Cvc = paymentTransaction.Cvc;
             BankName = paymentTransaction.BankName;
             CardType = paymentTransaction.CardType;
-            
+            BankCode = paymentTransaction.BankCode;
+
+
         }
     }
 }

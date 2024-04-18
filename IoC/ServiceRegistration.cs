@@ -20,6 +20,7 @@ namespace PaymentApiDotnet.IoC
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<IBankFactory, BankFactory>();
             services.AddScoped<IBinRepository,BinRepository>();
+            services.AddScoped<IBinService, BinService>();
             services.AddScoped<PaymentTransactionService>();
             services.AddScoped<DataContext>();
             services.AddScoped<VakıfBankService>();
@@ -30,7 +31,7 @@ namespace PaymentApiDotnet.IoC
             services.AddScoped<SekerbankService>();
             services.AddScoped<AkbankService>();
             services.AddScoped<IsBankService>();
-
+           
             services.Configure<RabbitMqConfiguration>(a => configuration.GetSection(nameof(RabbitMqConfiguration)).Bind(a));
             services.AddSingleton<IRabbitMqService, RabbitMqService>();
             services.AddSingleton<IConsumerService, ConsumerService>();

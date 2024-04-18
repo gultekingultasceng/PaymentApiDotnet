@@ -1,8 +1,10 @@
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 
 namespace PaymentApiDotnet.Models
 {
+    [Index(nameof(BankCode))]
     public class PaymentTransaction
     {
         [Key]
@@ -27,6 +29,10 @@ namespace PaymentApiDotnet.Models
         public string BankName { get; set; }
         [Required]
         public string CardType { get; set; }
+        [Required]
+        public int BankCode { get; set; }
+ 
+
 
     }
 }

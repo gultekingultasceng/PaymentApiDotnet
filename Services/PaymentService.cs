@@ -14,27 +14,20 @@ namespace PaymentApiDotnet.Services
     public class PaymentService : IPaymentService
     {
         private readonly IBankFactory _bankFactory;
-        private readonly IBinRepository _binRepository;
-        //private readonly PaymentEventProducerRabbitmq _paymentEventProducerRabbitmq;
+        private readonly IBinService _binService;
         private readonly IProducerService _producerService;
        
-        public PaymentService(IBankFactory bankFactory , IBinRepository binRepository, IProducerService producerService)// PaymentEventProducerRabbitmq paymentEventProducerRabbitmq)
+        public PaymentService(IBankFactory bankFactory , IBinService binService, IProducerService producerService)
         {
 
             _bankFactory = bankFactory;
-            _binRepository = binRepository;
+            _binService = binService;
             _producerService = producerService;
-           // _paymentEventProducerRabbitmq = paymentEventProducerRabbitmq;
-          
-            
         }
-
-   
 
         public PaymentResponseDto ProcessPayment(PaymentRequestDto paymentRequestDto)
         {
-           
-            var binInfo = _binRepository.GetBankInfosByCardNumber(paymentRequestDto.CardNumber);
+            var binInfo = _binService.GetBankInfosByCardNumber(paymentRequestDto.CardNumber);
             var releatedBankService = _bankFactory.GetBankServiceByPaymentType(binInfo.BankName);
             try
             {
@@ -42,7 +35,6 @@ namespace PaymentApiDotnet.Services
                if (!response.PaymentStatus)
                 {
                     _producerService.SendMessage(paymentRequestDto);
-                   /// _paymentEventProducerRabbitmq.SendMessage(paymentRequestDto);
                 }
                 return response;
             }
