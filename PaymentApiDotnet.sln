@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.810.20
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentApiDotnet", "PaymentApiDotnet.csproj", "{263A6E94-E204-469E-916F-32A80CE3DEF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentApiDotnet", "paymentapidotnet\PaymentApiDotnet.csproj", "{6201A64E-77B1-4D67-8169-67DAEED826FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentApiDotnet.Entities", "PaymentApiDotnet.Entities\PaymentApiDotnet.Entities.csproj", "{C8DA62D5-4A80-43A6-ABEF-33F3DF2C2BCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{263A6E94-E204-469E-916F-32A80CE3DEF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{263A6E94-E204-469E-916F-32A80CE3DEF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{263A6E94-E204-469E-916F-32A80CE3DEF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{263A6E94-E204-469E-916F-32A80CE3DEF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6201A64E-77B1-4D67-8169-67DAEED826FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6201A64E-77B1-4D67-8169-67DAEED826FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6201A64E-77B1-4D67-8169-67DAEED826FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6201A64E-77B1-4D67-8169-67DAEED826FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8DA62D5-4A80-43A6-ABEF-33F3DF2C2BCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8DA62D5-4A80-43A6-ABEF-33F3DF2C2BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8DA62D5-4A80-43A6-ABEF-33F3DF2C2BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8DA62D5-4A80-43A6-ABEF-33F3DF2C2BCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
