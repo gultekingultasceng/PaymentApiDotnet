@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PaymentApiDotnet.Context;
 using PaymentApiDotnet.IoC;
 using PaymentApiDotnet.RabbitMq;
+using PaymentApiDotnet.Repositories.EFCore;
 using PaymentApiDotnet.Services;
 using PaymentApiDotnet.Services.Base;
 using RabbitMQ.Client;
@@ -19,7 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-builder.Services.AddDbContext<DataContext>(
+builder.Services.AddDbContext<RepositoryContext>(
     o => o.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase"))
     );
 ServiceRegistration.AddPersistenceService(builder.Services , builder.Configuration); // Dependency Injection

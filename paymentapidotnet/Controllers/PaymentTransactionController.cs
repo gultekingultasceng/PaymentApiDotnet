@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PaymentApiDotnet.Dto;
 using PaymentApiDotnet.Entities.Models;
-using PaymentApiDotnet.Repository;
+using PaymentApiDotnet.Repositories;
 using PaymentApiDotnet.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -28,12 +28,6 @@ namespace PaymentApiDotnet.Controllers
         {
             return StatusCode(200);
         }
-
-
-
-
-
-
 
     }
 }

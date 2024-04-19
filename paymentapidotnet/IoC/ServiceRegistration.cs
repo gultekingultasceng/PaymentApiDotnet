@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PaymentApiDotnet.Context;
 using PaymentApiDotnet.Factory;
 using PaymentApiDotnet.RabbitMq;
 using PaymentApiDotnet.RabbitMq.latest;
-using PaymentApiDotnet.Repository;
+using PaymentApiDotnet.Repositories.Concrete;
+using PaymentApiDotnet.Repositories.Contracts;
+using PaymentApiDotnet.Repositories.EFCore;
 using PaymentApiDotnet.Services;
 using PaymentApiDotnet.Services.BankServices;
 using PaymentApiDotnet.Services.BankServices.Base;
@@ -22,7 +23,7 @@ namespace PaymentApiDotnet.IoC
             services.AddScoped<IBinRepository,BinRepository>();
             services.AddScoped<IBinService, BinService>();
             services.AddScoped<PaymentTransactionService>();
-            services.AddScoped<DataContext>();
+            services.AddScoped<RepositoryContext>();
             services.AddScoped<VakıfBankService>();
             services.AddScoped<HalkBankService>();
             services.AddScoped<ZiraatService>();

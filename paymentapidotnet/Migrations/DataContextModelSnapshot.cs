@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using PaymentApiDotnet.Context;
+using PaymentApiDotnet.Repositories.EFCore;
 
 #nullable disable
 
 namespace PaymentApiDotnet.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(RepositoryContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

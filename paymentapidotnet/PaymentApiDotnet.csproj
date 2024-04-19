@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Docker\**" />
+    <Content Remove="Docker\**" />
+    <EmbeddedResource Remove="Docker\**" />
+    <None Remove="Docker\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="CheckDigits.Net" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
@@ -30,10 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Docker\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\PaymentApiDotnet.Repositories\PaymentApiDotnet.Repositories.csproj" />
     <ProjectReference Include="..\PaymentApiDotnet.Entities\PaymentApiDotnet.Entities.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,6 @@
 ﻿using PaymentApiDotnet.Entities.Models;
-using PaymentApiDotnet.Repository;
+using PaymentApiDotnet.Repositories.Contracts;
+
 
 namespace PaymentApiDotnet.Services
 {

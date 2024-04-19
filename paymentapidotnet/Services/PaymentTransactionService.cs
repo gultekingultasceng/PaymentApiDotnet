@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using PaymentApiDotnet.Dto;
 using PaymentApiDotnet.Entities.Models;
-using PaymentApiDotnet.Repository;
+using PaymentApiDotnet.Repositories.Contracts;
 using System;
 
 namespace PaymentApiDotnet.Services

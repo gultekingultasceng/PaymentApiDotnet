@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using PaymentApiDotnet.Context;
+using PaymentApiDotnet.Repositories.EFCore;
 
 #nullable disable
 
 namespace PaymentApiDotnet.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(RepositoryContext))]
     [Migration("20240418100650_PaymentTransactionNewColumn")]
     partial class PaymentTransactionNewColumn
     {
