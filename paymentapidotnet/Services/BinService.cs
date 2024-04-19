@@ -6,16 +6,17 @@ namespace PaymentApiDotnet.Services
 {
     public class BinService : IBinService
     {
-        private readonly IBinRepository _binRepository;
+    
+        private readonly IRepositoryManager _repositoryManager;
 
-        public BinService(IBinRepository binRepository)
+        public BinService(IRepositoryManager repositoryManager)
         {
-            _binRepository = binRepository;
+            _repositoryManager = repositoryManager;
         }
 
         public Bin? GetBankInfosByCardNumber(string cardNumber)
         {
-            return _binRepository.GetBankInfosByCardNumber(cardNumber);
+            return _repositoryManager.binRepository.GetBankInfoByCardNumber(cardNumber, true);
         }
     }
 }

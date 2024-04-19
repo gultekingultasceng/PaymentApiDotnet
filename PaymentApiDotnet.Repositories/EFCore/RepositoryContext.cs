@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PaymentApiDotnet.Entities.Models;
-using PaymentApiDotnet.Repositories.Config;
+using PaymentApiDotnet.Repositories.EFCore.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;

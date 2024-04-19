@@ -1,4 +1,5 @@
 ﻿using PaymentApiDotnet.Entities.Models;
+using PaymentApiDotnet.Repositories.Base;
 using PaymentApiDotnet.Repositories.Contracts;
 using PaymentApiDotnet.Repositories.EFCore;
 using System;
@@ -9,19 +10,20 @@ using System.Threading.Tasks;
 
 namespace PaymentApiDotnet.Repositories.Concrete
 {
-    public class BinRepository : IBinRepository
+    public class BinRepository :RepositoryBase<Bin>, IBinRepository
     {
-        private readonly RepositoryContext _repositoryContext;
-        public BinRepository(RepositoryContext repositoryContext)
+        public BinRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
-            _repositoryContext = repositoryContext;
+
         }
-        public Bin? GetBankInfosByCardNumber(string cardNumber)
+
+        public Bin? GetBankInfoByCardNumber(string cardNumber, bool trackChanges)
         {
-            int binNumber = int.Parse(cardNumber.Substring(0, 6));
-            return !string.IsNullOrEmpty(cardNumber) ? (from bin in _repositoryContext.Bins
-                                                        where bin.BinNumber == binNumber
-                                                        select bin).FirstOrDefault() : null;
+            int binNumber = int.Parse(cardNumber[..6]);// get first 6 digits as binNumber
+            var bin = FindByCondition(b => b.BinNumber.Equals(binNumber), trackChanges).SingleOrDefault();
+            return bin;
         }
+
+    
     }
 }

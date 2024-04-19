@@ -7,20 +7,20 @@ using System.Text;
 using System.Threading.Tasks;
 using PaymentApiDotnet.Entities.Models;
 
-namespace PaymentApiDotnet.Repositories.Config
+namespace PaymentApiDotnet.Repositories.EFCore.Config
 {
     public class BinConfig : IEntityTypeConfiguration<Bin>
     {
         public void Configure(EntityTypeBuilder<Bin> builder)
         {
-            var lines = System.IO.File.ReadAllLines(@"Files/bincsv.csv");
+            var lines = File.ReadAllLines(@"Files/bincsv.csv");
             List<Bin> bins = new List<Bin>();
             for (int i = 0; i < lines.Length; i++)
             {
                 var values = lines[i].Split(',');
                 Bin bin = new Bin
                 {
-                    Id = (i + 1),
+                    Id = i + 1,
                     BinNumber = int.Parse(values[0]),
                     BankCode = int.Parse(values[1]),
                     BankName = values[2],

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PaymentApiDotnet.IoC;
+using PaymentApiDotnet.Extensions;
 using PaymentApiDotnet.RabbitMq;
 using PaymentApiDotnet.Repositories.EFCore;
 using PaymentApiDotnet.Services;
@@ -19,10 +19,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-builder.Services.AddDbContext<RepositoryContext>(
-    o => o.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase"))
-    );
-ServiceRegistration.AddPersistenceService(builder.Services , builder.Configuration); // Dependency Injection
+builder.Services.ConfigureSqlContext(builder.Configuration);
+builder.Services.ConfigureRepositoryManager();
+builder.Services.ConfigureRabbitMq(builder.Configuration);
+builder.Services.ConfigureServicesLayer();
 
 var app = builder.Build();
 
@@ -35,15 +35,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapDefaultControllerRoute();
 });
-//app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
 
 

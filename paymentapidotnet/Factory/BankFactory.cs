@@ -6,7 +6,7 @@ namespace PaymentApiDotnet.Factory
 {
     public class BankFactory : IBankFactory
     {
-        private Dictionary<string, IBankService> _bankServiceByPaymentType;
+        private Dictionary<string, IBankServiceBase> _bankServiceByPaymentType;
 
         public BankFactory(ZiraatService ziraatService ,AkbankService akbankService,
             SekerbankService sekerbankService , TEBService tebService,
@@ -25,7 +25,7 @@ namespace PaymentApiDotnet.Factory
             { "T. İŞ BANKASI A.Ş.",isbankService }
         };
         }
-        public IBankService GetBankServiceByPaymentType(string bankName)
+        public IBankServiceBase GetBankServiceByPaymentType(string bankName)
         {
             return _bankServiceByPaymentType[bankName];
         }

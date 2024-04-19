@@ -10,12 +10,12 @@ namespace PaymentApiDotnet.Services
 {
     public class PaymentTransactionService
     {
-        private readonly IPaymentRepository _paymentRepository;
+        private readonly IRepositoryManager _repositoryManager;
         private readonly IMapper _mapper;
 
-        public PaymentTransactionService(IPaymentRepository paymentRepository , IMapper mapper)
+        public PaymentTransactionService(IRepositoryManager repositoryManager , IMapper mapper)
         {
-            _paymentRepository = paymentRepository;
+            _repositoryManager = repositoryManager;
             _mapper = mapper;
         }
         public void CreatePaymentTransactionFromPaymentRequest(PaymentRequestDto paymentRequestDto ,Bin binInfo, bool paymentStatus)
@@ -23,12 +23,13 @@ namespace PaymentApiDotnet.Services
             PaymentTransaction paymentTransaction = _mapper.Map<PaymentTransaction>(paymentRequestDto);
             _mapper.Map(binInfo, paymentTransaction);
             paymentTransaction.PaymentStatus = paymentStatus;
-             _paymentRepository.AddTransaction(paymentTransaction);
+            _repositoryManager.paymentRepository.AddTransaction(paymentTransaction);
+            _repositoryManager.Save();
         }
 
         public List<PaymentTransactionDto> GetTransactionsByBankCode(int bankCode)
         {
-            List<PaymentTransaction> paymentTransactions =  _paymentRepository.GetTransactionsByBankCode(bankCode);
+            List<PaymentTransaction> paymentTransactions = _repositoryManager.paymentRepository.GetPaymentTransactionsByBankCode(bankCode, true).ToList();
             List<PaymentTransactionDto> paymentTransactionDtoList = new List<PaymentTransactionDto>();
             foreach (var paymentTransaction in paymentTransactions)
             {

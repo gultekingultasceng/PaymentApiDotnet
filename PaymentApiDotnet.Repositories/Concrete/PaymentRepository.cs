@@ -1,4 +1,5 @@
 ﻿using PaymentApiDotnet.Entities.Models;
+using PaymentApiDotnet.Repositories.Base;
 using PaymentApiDotnet.Repositories.Contracts;
 using PaymentApiDotnet.Repositories.EFCore;
 using System;
@@ -9,23 +10,37 @@ using System.Threading.Tasks;
 
 namespace PaymentApiDotnet.Repositories.Concrete
 {
-    public class PaymentRepository : IPaymentRepository
+    public class PaymentRepository : RepositoryBase<PaymentTransaction> , IPaymentRepository
     {
-        private readonly RepositoryContext _repositoryContext;
-        public PaymentRepository(RepositoryContext repositoryContext)
+        public PaymentRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
-            _repositoryContext = repositoryContext;
+
         }
-        public void AddTransaction(PaymentTransaction payment)
+
+        public void AddTransaction(PaymentTransaction paymentTransaction)
         {
-            _repositoryContext.PaymentTransactions.Add(payment);
-            _repositoryContext.SaveChanges();
+            Create(paymentTransaction);
         }
-        public List<PaymentTransaction> GetTransactionsByBankCode(int bankCode)
+
+        public void DeleteTransaction(PaymentTransaction paymentTransaction)
         {
-            return _repositoryContext.PaymentTransactions
-               .Where(p => p.BankCode.Equals(bankCode))
-               .ToList();
+            Delete(paymentTransaction);
+        }
+
+        public IQueryable<PaymentTransaction> GetAllPaymentTransactions(bool trackChanges)
+        {
+            return FindAll(trackChanges);
+            // we can modify the query exp : FindAll(trackChanges).OrderBy(p => p.Id)
+        }
+
+        public IQueryable<PaymentTransaction> GetPaymentTransactionsByBankCode(int bankCode, bool trackChanges)
+        {
+            return FindByCondition(p => p.BankCode.Equals(bankCode), trackChanges);
+        }
+
+        public void UpdateTransaction(PaymentTransaction paymentTransaction)
+        {
+            Update(paymentTransaction);
         }
     }
 }

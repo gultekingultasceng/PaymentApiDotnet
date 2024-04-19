@@ -5,20 +5,15 @@ using PaymentApiDotnet.Services.BankServices.Base;
 
 namespace PaymentApiDotnet.Services.BankServices
 {
-    public class ZiraatService : IBankService
+    public class ZiraatService : BankServiceBase
     {
-        private readonly PaymentTransactionService _transactionService;
-        public ZiraatService(PaymentTransactionService transactionService)
+        public ZiraatService(PaymentTransactionService transactionService) : base(transactionService)
         {
-            _transactionService = transactionService;
+
         }
-        public PaymentResponseDto ProcessPayment(PaymentRequestDto paymentRequestDto, Bin binInfo)
+        public override void AfterPayment()
         {
-            PaymentInfo paymentInfo = new PaymentInfo(paymentRequestDto.Amount, paymentRequestDto.OrderId);
-            CreditCard creditCard = new CreditCard(paymentRequestDto.CardNumber, paymentRequestDto.Name, paymentRequestDto.Surname, paymentRequestDto.ExpDate, paymentRequestDto.Cvc);
-            PaymentResponseDto paymentResponseDto = new PaymentResponseDto(paymentInfo);
-            _transactionService.CreatePaymentTransactionFromPaymentRequest(paymentRequestDto, binInfo, paymentResponseDto.PaymentStatus);
-            return paymentResponseDto;
+
         }
     }
 }
