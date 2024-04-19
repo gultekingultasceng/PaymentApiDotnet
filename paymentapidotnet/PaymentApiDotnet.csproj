@@ -37,8 +37,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PaymentApiDotnet.Repositories\PaymentApiDotnet.Repositories.csproj" />
     <ProjectReference Include="..\PaymentApiDotnet.Entities\PaymentApiDotnet.Entities.csproj" />
+    <ProjectReference Include="..\PaymentApiDotnet.Repositories\PaymentApiDotnet.Repositories.csproj" />
   </ItemGroup>
 
 </Project>
