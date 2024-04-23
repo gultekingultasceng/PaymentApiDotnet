@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using PaymentApiDotnet.Services.Base;
 using PaymentApiDotnet.Services;
 
-namespace PaymentApiDotnet.RabbitMq.latest
+namespace PaymentApiDotnet.RabbitMq
 {
 
     public interface IConsumerService
@@ -18,7 +18,7 @@ namespace PaymentApiDotnet.RabbitMq.latest
         private readonly IModel _model;
         private readonly IConnection _connection;
         private readonly IServiceScopeFactory _serviceScopeFactory;
-        public ConsumerService(IRabbitMqService rabbitMqService , IServiceScopeFactory serviceScopeFactory)
+        public ConsumerService(IRabbitMqService rabbitMqService, IServiceScopeFactory serviceScopeFactory)
         {
             _serviceScopeFactory = serviceScopeFactory;
             _connection = rabbitMqService.CreateChannel();
@@ -27,7 +27,7 @@ namespace PaymentApiDotnet.RabbitMq.latest
             _model.ExchangeDeclare("UserExchange", ExchangeType.Fanout, durable: true, autoDelete: false);
             _model.QueueBind(_queueName, "UserExchange", string.Empty);
         }
-       
+
         public async Task ReadMessgaes()
         {
             var consumer = new AsyncEventingBasicConsumer(_model);

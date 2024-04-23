@@ -4,7 +4,7 @@ using PaymentApiDotnet.Services.Base;
 using RabbitMQ.Client;
 using System.Text;
 
-namespace PaymentApiDotnet.RabbitMq.latest
+namespace PaymentApiDotnet.RabbitMq
 {
     public interface IProducerService
     {
@@ -15,7 +15,7 @@ namespace PaymentApiDotnet.RabbitMq.latest
         const string _queueName = "paymentQueue";
         private readonly IModel _model;
         private readonly IConnection _connection;
-        
+
         public ProducerService(IRabbitMqService rabbitMqService)
         {
             _connection = rabbitMqService.CreateChannel();

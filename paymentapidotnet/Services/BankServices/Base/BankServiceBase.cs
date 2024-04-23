@@ -19,9 +19,5 @@ namespace PaymentApiDotnet.Services.BankServices.Base
             return paymentResponseDto;
         }
         public abstract void AfterPayment();
-
-  
-
-     
     }
 }

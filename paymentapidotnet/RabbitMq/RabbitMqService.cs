@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
-namespace PaymentApiDotnet.RabbitMq.latest
+namespace PaymentApiDotnet.RabbitMq
 {
     public class RabbitMqService : IRabbitMqService
     {

@@ -4,7 +4,6 @@ using PaymentApiDotnet.Dto;
 using PaymentApiDotnet.Factory;
 using PaymentApiDotnet.Entities.Models;
 using PaymentApiDotnet.RabbitMq;
-using PaymentApiDotnet.RabbitMq.latest;
 using PaymentApiDotnet.Services.Base;
 using System;
 

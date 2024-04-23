@@ -1,4 +1,4 @@
-﻿namespace PaymentApiDotnet.RabbitMq.latest
+﻿namespace PaymentApiDotnet.RabbitMq
 {
     public class ConsumerHostedService : BackgroundService
     {

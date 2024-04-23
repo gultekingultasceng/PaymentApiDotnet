@@ -1,6 +1,6 @@
 ﻿using RabbitMQ.Client;
 
-namespace PaymentApiDotnet.RabbitMq.latest
+namespace PaymentApiDotnet.RabbitMq
 {
     public interface IRabbitMqService
     {

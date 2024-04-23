@@ -39,6 +39,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PaymentApiDotnet.Entities\PaymentApiDotnet.Entities.csproj" />
     <ProjectReference Include="..\PaymentApiDotnet.Repositories\PaymentApiDotnet.Repositories.csproj" />
+    <ProjectReference Include="..\PaymentApiDotnet.Services\PaymentApiDotnet.Services.csproj" />
   </ItemGroup>
 
 </Project>
