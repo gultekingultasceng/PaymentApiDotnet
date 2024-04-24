@@ -9,17 +9,17 @@ namespace PaymentApiDotnet.Presentation.Controllers
     public class PaymentController : ControllerBase
     {
 
-        private readonly IPaymentService _paymentService;
+        private readonly IServiceManager _serviceManager;
 
-        public PaymentController(IPaymentService paymentService)
+        public PaymentController(IServiceManager serviceManager)
         {
-            _paymentService = paymentService;
+            _serviceManager = serviceManager;
         }
 
         [HttpPost(Name = "Pay")]
         public IActionResult MakePayment([FromBody] PaymentRequestDto paymentRequestDto)
         {
-            return StatusCode(201, _paymentService.ProcessPayment(paymentRequestDto));
+            return StatusCode(201, _serviceManager.PaymentService.ProcessPayment(paymentRequestDto));
         }
     }
 }

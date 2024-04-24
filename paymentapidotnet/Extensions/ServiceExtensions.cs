@@ -1,14 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PaymentApiDotnet.Factory;
-using PaymentApiDotnet.RabbitMq;
 using PaymentApiDotnet.Repositories.Base;
 using PaymentApiDotnet.Repositories.Contracts;
 using PaymentApiDotnet.Repositories.EFCore;
-using PaymentApiDotnet.Services.BankServices;
-using PaymentApiDotnet.Services.BinServices;
+using PaymentApiDotnet.Services.Base;
 using PaymentApiDotnet.Services.Contracts;
-using PaymentApiDotnet.Services.PaymentServices;
-
+using PaymentApiDotnet.Services.MessageQueue.Rabbitmq;
 namespace PaymentApiDotnet.Extensions
 {
     public static class ServiceExtensions
@@ -33,20 +29,9 @@ namespace PaymentApiDotnet.Extensions
             services.AddSingleton<IProducerService, ProducerService>();
             services.AddHostedService<ConsumerHostedService>();
         }
-        public static void ConfigureServicesLayer(this IServiceCollection services)
+        public static void ConfigureServiceManager(this IServiceCollection services)
         {
-            services.AddScoped<PaymentTransactionService>();
-            services.AddScoped<IPaymentService, PaymentService>();
-            services.AddScoped<IBinService, BinService>();
-            services.AddScoped<IBankFactory, BankFactory>();
-            services.AddTransient<VakıfBankService>();
-            services.AddTransient<HalkBankService>();
-            services.AddTransient<ZiraatService>();
-            services.AddTransient<GarantiService>();
-            services.AddTransient<TEBService>();
-            services.AddTransient<SekerbankService>();
-            services.AddTransient<AkbankService>();
-            services.AddTransient<IsBankService>();
+            services.AddScoped<IServiceManager, ServiceManager>();
         }
     }
 }

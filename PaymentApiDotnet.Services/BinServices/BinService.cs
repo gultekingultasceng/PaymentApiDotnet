@@ -17,7 +17,7 @@ namespace PaymentApiDotnet.Services.BinServices
 
         public Bin? GetBankInfosByCardNumber(string cardNumber)
         {
-            return _repositoryManager.binRepository.GetBankInfoByCardNumber(cardNumber, true);
+            return _repositoryManager.BinRepository.GetBankInfoByCardNumber(cardNumber, true);
         }
     }
 }

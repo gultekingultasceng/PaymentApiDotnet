@@ -23,9 +23,9 @@ namespace PaymentApiDotnet.Repositories.Base
             _paymentRepository = new Lazy<IPaymentRepository>(() => new PaymentRepository(_repositoryContext));
             _binRepository = new Lazy<IBinRepository>(() => new BinRepository(_repositoryContext));
         }
-        public IPaymentRepository paymentRepository => _paymentRepository.Value;
+        public IPaymentRepository PaymentRepository => _paymentRepository.Value;
 
-        public IBinRepository binRepository => _binRepository.Value;
+        public IBinRepository BinRepository => _binRepository.Value;
 
         public void Save()
         {

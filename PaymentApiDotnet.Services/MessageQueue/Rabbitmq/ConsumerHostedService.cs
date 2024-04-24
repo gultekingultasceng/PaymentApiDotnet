@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 
-namespace PaymentApiDotnet.RabbitMq
+namespace PaymentApiDotnet.Services.MessageQueue.Rabbitmq
 {
     public class ConsumerHostedService : BackgroundService
     {

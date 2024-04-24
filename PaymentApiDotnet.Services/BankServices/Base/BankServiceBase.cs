@@ -7,16 +7,16 @@ namespace PaymentApiDotnet.Services.BankServices.Base
 {
     public abstract class BankServiceBase : IBankServiceBase
     {
-        protected readonly PaymentTransactionService _transactionService;
-        public BankServiceBase(PaymentTransactionService transactionService)
+        protected readonly IPaymentTransactionService _paymentTransactionService;
+        public BankServiceBase(IPaymentTransactionService paymentTransactionService)
         {
-            _transactionService = transactionService;
+            _paymentTransactionService = paymentTransactionService;
         }
         public virtual PaymentResponseDto ProcessPayment(PaymentRequestDto paymentRequestDto, Bin binInfo)
         {
             PaymentInfo paymentInfo = new PaymentInfo(paymentRequestDto.Amount, paymentRequestDto.OrderId);
             PaymentResponseDto paymentResponseDto = new PaymentResponseDto(paymentInfo);
-            _transactionService.CreatePaymentTransactionFromPaymentRequest(paymentRequestDto, binInfo, paymentResponseDto.PaymentStatus);
+            _paymentTransactionService.CreatePaymentTransactionFromPaymentRequest(paymentRequestDto, binInfo, paymentResponseDto.PaymentStatus);
             AfterPayment();
             return paymentResponseDto;
         }

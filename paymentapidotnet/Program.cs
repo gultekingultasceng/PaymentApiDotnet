@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureRabbitMq(builder.Configuration);
-builder.Services.ConfigureServicesLayer();
+builder.Services.ConfigureServiceManager();
 
 var app = builder.Build();
 

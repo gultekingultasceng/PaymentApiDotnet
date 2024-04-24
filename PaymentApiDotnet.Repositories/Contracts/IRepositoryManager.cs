@@ -8,8 +8,8 @@ namespace PaymentApiDotnet.Repositories.Contracts
 {
     public interface IRepositoryManager
     {
-        IPaymentRepository paymentRepository { get; }
-        IBinRepository binRepository { get; }
+        IPaymentRepository PaymentRepository { get; }
+        IBinRepository BinRepository { get; }
         void Save();
     }
 }

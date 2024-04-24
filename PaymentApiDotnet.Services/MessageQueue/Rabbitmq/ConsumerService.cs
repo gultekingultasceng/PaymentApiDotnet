@@ -5,7 +5,7 @@ using PaymentApiDotnet.Services.Contracts;
 using PaymentApiDotnet.Entities.DataTransferObjects;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace PaymentApiDotnet.RabbitMq
+namespace PaymentApiDotnet.Services.MessageQueue.Rabbitmq
 {
 
     public interface IConsumerService
@@ -36,14 +36,12 @@ namespace PaymentApiDotnet.RabbitMq
                 using (var scope = _serviceScopeFactory.CreateScope())
                 {
                     var serviceProvider = scope.ServiceProvider;
-                    var paymentService = serviceProvider.GetRequiredService<IPaymentService>();
-
+                    var paymentService = serviceProvider.GetRequiredService<IServiceManager>().PaymentService;
                     var body = ea.Body.ToArray();
                     var text = System.Text.Encoding.UTF8.GetString(body);
                     var paymentRequestDto = JsonConvert.DeserializeObject<PaymentRequestDto>(text);
                     Console.WriteLine(" [x] Received {0}", text);
                     paymentService.ProcessPayment(paymentRequestDto);
-
                     Console.WriteLine(text);
                     await Task.CompletedTask;
                     _model.BasicAck(ea.DeliveryTag, false);

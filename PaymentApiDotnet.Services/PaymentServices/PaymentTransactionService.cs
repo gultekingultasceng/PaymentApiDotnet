@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using PaymentApiDotnet.Entities.DataTransferObjects;
 using PaymentApiDotnet.Entities.Models;
 using PaymentApiDotnet.Repositories.Contracts;
-using System;
+using PaymentApiDotnet.Services.Contracts;
 
 namespace PaymentApiDotnet.Services.PaymentServices
 {
-    public class PaymentTransactionService
+    public class PaymentTransactionService : IPaymentTransactionService
     {
         private readonly IRepositoryManager _repositoryManager;
         private readonly IMapper _mapper;
@@ -22,13 +21,13 @@ namespace PaymentApiDotnet.Services.PaymentServices
             PaymentTransaction paymentTransaction = _mapper.Map<PaymentTransaction>(paymentRequestDto);
             _mapper.Map(binInfo, paymentTransaction);
             paymentTransaction.PaymentStatus = paymentStatus;
-            _repositoryManager.paymentRepository.AddTransaction(paymentTransaction);
+            _repositoryManager.PaymentRepository.AddTransaction(paymentTransaction);
             _repositoryManager.Save();
         }
 
         public IEnumerable<PaymentTransactionDto> GetTransactionsByBankCode(int bankCode)
         {
-            List<PaymentTransaction> paymentTransactions = _repositoryManager.paymentRepository.
+            List<PaymentTransaction> paymentTransactions = _repositoryManager.PaymentRepository.
                 GetPaymentTransactionsByBankCode(bankCode, true).ToList();
             List<PaymentTransactionDto> paymentTransactionDtoList = new List<PaymentTransactionDto>();
             foreach (var paymentTransaction in paymentTransactions)

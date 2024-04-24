@@ -1,4 +1,4 @@
-﻿namespace PaymentApiDotnet.RabbitMq
+﻿namespace PaymentApiDotnet.Services.MessageQueue.Rabbitmq
 {
     public class RabbitMqConfiguration
     {

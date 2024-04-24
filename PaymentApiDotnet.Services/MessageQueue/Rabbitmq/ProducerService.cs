@@ -3,7 +3,7 @@ using PaymentApiDotnet.Entities.DataTransferObjects;
 using RabbitMQ.Client;
 using System.Text;
 
-namespace PaymentApiDotnet.RabbitMq
+namespace PaymentApiDotnet.Services.MessageQueue.Rabbitmq
 {
     public interface IProducerService
     {

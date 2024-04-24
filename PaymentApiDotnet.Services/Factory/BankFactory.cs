@@ -1,7 +1,7 @@
 ﻿using PaymentApiDotnet.Services.BankServices;
 using PaymentApiDotnet.Services.Contracts;
 
-namespace PaymentApiDotnet.Factory
+namespace PaymentApiDotnet.Services.Factory
 {
     public class BankFactory : IBankFactory
     {
