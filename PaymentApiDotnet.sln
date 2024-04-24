@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentApiDotnet.Entities",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentApiDotnet.Repositories", "PaymentApiDotnet.Repositories\PaymentApiDotnet.Repositories.csproj", "{4EC552BE-CD43-4CA2-AC12-060479341765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentApiDotnet.Services", "PaymentApiDotnet.Services\PaymentApiDotnet.Services.csproj", "{B2692E80-AA63-4DD0-8885-50E4A269B54B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentApiDotnet.Services", "PaymentApiDotnet.Services\PaymentApiDotnet.Services.csproj", "{B2692E80-AA63-4DD0-8885-50E4A269B54B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentApiDotnet.Presentation", "PaymentApiDotnet.Presentation\PaymentApiDotnet.Presentation.csproj", "{A0A9CAB6-A5EF-4E09-AEBA-50044D20F6D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B2692E80-AA63-4DD0-8885-50E4A269B54B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2692E80-AA63-4DD0-8885-50E4A269B54B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2692E80-AA63-4DD0-8885-50E4A269B54B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0A9CAB6-A5EF-4E09-AEBA-50044D20F6D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0A9CAB6-A5EF-4E09-AEBA-50044D20F6D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0A9CAB6-A5EF-4E09-AEBA-50044D20F6D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0A9CAB6-A5EF-4E09-AEBA-50044D20F6D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

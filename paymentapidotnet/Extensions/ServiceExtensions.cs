@@ -1,14 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using PaymentApiDotnet.Factory;
 using PaymentApiDotnet.RabbitMq;
 using PaymentApiDotnet.Repositories.Base;
 using PaymentApiDotnet.Repositories.Contracts;
 using PaymentApiDotnet.Repositories.EFCore;
-using PaymentApiDotnet.Services;
 using PaymentApiDotnet.Services.BankServices;
-using PaymentApiDotnet.Services.BankServices.Base;
-using PaymentApiDotnet.Services.Base;
+using PaymentApiDotnet.Services.BinServices;
+using PaymentApiDotnet.Services.Contracts;
+using PaymentApiDotnet.Services.PaymentServices;
 
 namespace PaymentApiDotnet.Extensions
 {
