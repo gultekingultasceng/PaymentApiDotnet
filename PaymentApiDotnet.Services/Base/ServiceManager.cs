@@ -6,6 +6,7 @@ using PaymentApiDotnet.Services.BinServices;
 using PaymentApiDotnet.Services.Contracts;
 using PaymentApiDotnet.Services.MessageQueue.Rabbitmq;
 using PaymentApiDotnet.Services.PaymentServices;
+using PaymentApiDotnet.Services.Logger;
 
 
 namespace PaymentApiDotnet.Services.Base
@@ -16,7 +17,8 @@ namespace PaymentApiDotnet.Services.Base
         private readonly Lazy<IPaymentTransactionService> _paymentTransactionService;
         private readonly Lazy<IBinService> _binService;
         private readonly Lazy<IBankFactory> _bankFactory;
-        public ServiceManager(IRepositoryManager repositoryManager,IProducerService producerService,IMapper mapper)
+        private readonly Lazy<ILoggerService> _loggerService;
+        public ServiceManager(IRepositoryManager repositoryManager,IProducerService producerService,IMapper mapper , ILoggerService loggerService)
         {
             _paymentTransactionService = new Lazy<IPaymentTransactionService>(() => new PaymentTransactionService(repositoryManager, mapper));
             
@@ -30,7 +32,8 @@ namespace PaymentApiDotnet.Services.Base
                 new HalkBankService(_paymentTransactionService.Value),
                 new IsBankService(_paymentTransactionService.Value)
                  ));
-            _paymentService = new Lazy<IPaymentService>(() => new PaymentService(this , _bankFactory.Value, producerService));
+            _loggerService = new Lazy<ILoggerService>(()=> new LoggerManager());
+            _paymentService = new Lazy<IPaymentService>(() => new PaymentService(this , _bankFactory.Value, producerService , _loggerService.Value));
             _binService = new Lazy<IBinService>(() => new BinService(repositoryManager));
         }
         public IPaymentService PaymentService => _paymentService.Value;
@@ -40,5 +43,7 @@ namespace PaymentApiDotnet.Services.Base
         public IBinService BinService => _binService.Value;
 
         public IBankFactory BankFactory => _bankFactory.Value;
+
+        public ILoggerService LoggerService => _loggerService.Value;
     }
 }

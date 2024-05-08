@@ -8,15 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().
     AddApplicationPart(typeof(PaymentApiDotnet.Presentation.AssemblyReference).Assembly);
 
-builder.Services.AddAutoMapper(typeof(PaymentApiDotnet.Services.AssemblyReference).Assembly);
 
+builder.Services.AddAutoMapper(typeof(PaymentApiDotnet.Services.AssemblyReference).Assembly);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.ConfigureSqlContext(builder.Configuration);
+builder.Services.ConfigureLoggingDatabase(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureRabbitMq(builder.Configuration);
 builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureLoggerService();
 
 var app = builder.Build();
 

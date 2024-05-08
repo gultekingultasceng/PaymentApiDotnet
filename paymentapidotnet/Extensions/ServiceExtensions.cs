@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using PaymentApiDotnet.Repositories.Base;
 using PaymentApiDotnet.Repositories.Contracts;
 using PaymentApiDotnet.Repositories.EFCore;
 using PaymentApiDotnet.Services.Base;
 using PaymentApiDotnet.Services.Contracts;
+using PaymentApiDotnet.Services.Logger;
 using PaymentApiDotnet.Services.MessageQueue.Rabbitmq;
 namespace PaymentApiDotnet.Extensions
 {
@@ -14,6 +16,17 @@ namespace PaymentApiDotnet.Extensions
             services.AddDbContext<RepositoryContext>(
             o => o.UseNpgsql(configuration.GetConnectionString("WebApiDatabase"))
             );
+        }
+        public static void ConfigureLoggingDatabase(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("MongoDB");
+            var mongoDbSection = configuration.GetSection("MongoDB");
+            var databaseName = mongoDbSection["DatabaseName"];
+            var collectionName = mongoDbSection["CollectionName"];
+            services.AddSingleton<IMongoClient, MongoClient>(sp =>
+            new MongoClient(connectionString));
+            services.AddSingleton<IMongoDatabase>(sp =>
+            sp.GetRequiredService<IMongoClient>().GetDatabase(databaseName));
         }
 
         public static void ConfigureRepositoryManager(this IServiceCollection services)
@@ -32,6 +45,10 @@ namespace PaymentApiDotnet.Extensions
         public static void ConfigureServiceManager(this IServiceCollection services)
         {
             services.AddScoped<IServiceManager, ServiceManager>();
+        }
+        public static void ConfigureLoggerService(this IServiceCollection services)
+        {
+            services.AddSingleton<ILoggerService,LoggerManager>();
         }
     }
 }

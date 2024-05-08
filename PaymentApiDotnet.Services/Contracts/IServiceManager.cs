@@ -1,4 +1,5 @@
 ﻿using PaymentApiDotnet.Services.Factory;
+using PaymentApiDotnet.Services.Logger;
 using PaymentApiDotnet.Services.MessageQueue.Rabbitmq;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace PaymentApiDotnet.Services.Contracts
         IPaymentTransactionService PaymentTransactionService { get; }
         IBinService BinService { get; } 
         IBankFactory BankFactory { get; }
+        ILoggerService LoggerService { get; }
     }
 }
