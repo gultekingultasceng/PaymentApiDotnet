@@ -24,9 +24,11 @@ namespace PaymentApiDotnet.Services.Factory
             { "T. İŞ BANKASI A.Ş.",isbankService }
         };
         }
-        public IBankServiceBase GetBankServiceByPaymentType(string bankName)
+        public IBankServiceBase? GetBankServiceByPaymentType(string bankName)
         {
-            return _bankServiceByPaymentType[bankName];
+            if (_bankServiceByPaymentType.ContainsKey(bankName))
+                return _bankServiceByPaymentType[bankName];
+            return null;
         }
     }
 }

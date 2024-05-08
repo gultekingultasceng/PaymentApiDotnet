@@ -4,6 +4,6 @@ namespace PaymentApiDotnet.Services.Factory
 {
     public interface IBankFactory
     {
-        IBankServiceBase GetBankServiceByPaymentType(string bankName);
+        IBankServiceBase? GetBankServiceByPaymentType(string bankName);
     }
 }

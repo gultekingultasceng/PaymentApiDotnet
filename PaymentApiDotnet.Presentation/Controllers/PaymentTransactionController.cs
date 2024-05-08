@@ -20,11 +20,6 @@ namespace PaymentApiDotnet.Presentation.Controllers
             return StatusCode(200, _serviceManager.PaymentTransactionService.GetTransactionsByBankCode(bankCode));
         }
 
-        [HttpGet]
-        public IActionResult GetTheBankWithMostSuccessfulPayment()
-        {
-            return StatusCode(200);
-        }
 
     }
 }

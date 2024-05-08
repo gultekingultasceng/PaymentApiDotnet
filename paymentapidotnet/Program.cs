@@ -1,9 +1,14 @@
+using NLog;
 using PaymentApiDotnet.Extensions;
+using PaymentApiDotnet.Services.Logger;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+LogManager.Setup().LoadConfigurationFromFile(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 builder.Services.AddControllers().
     AddApplicationPart(typeof(PaymentApiDotnet.Presentation.AssemblyReference).Assembly);
@@ -20,14 +25,18 @@ builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureLoggerService();
 
 var app = builder.Build();
-
+var logger = app.Services.GetRequiredService<ILoggerService>();
+app.ConfigureExceptionHandler(logger);
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+if (app.Environment.IsProduction())
+{
+    app.UseHsts();
+}
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();

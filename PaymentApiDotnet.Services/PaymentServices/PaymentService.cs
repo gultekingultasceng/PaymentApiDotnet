@@ -3,6 +3,7 @@ using PaymentApiDotnet.Entities.DataTransferObjects;
 using PaymentApiDotnet.Services.Factory;
 using PaymentApiDotnet.Services.MessageQueue.Rabbitmq;
 using PaymentApiDotnet.Services.Logger;
+using PaymentApiDotnet.Entities.Exceptions;
 
 namespace PaymentApiDotnet.Services.PaymentServices
 {
@@ -23,36 +24,27 @@ namespace PaymentApiDotnet.Services.PaymentServices
         public PaymentResponseDto ProcessPayment(PaymentRequestDto paymentRequestDto)
         {
             var binInfo = _serviceManager.BinService.GetBankInfosByCardNumber(paymentRequestDto.CardNumber);
-            var releatedBankService = _bankFactory.GetBankServiceByPaymentType(binInfo.BankName);
-            try
+            string bankName = binInfo.BankName;
+            var releatedBankService = _bankFactory.GetBankServiceByPaymentType(bankName);
+            PaymentResponseDto response;
+            if (releatedBankService != null)
             {
-                PaymentResponseDto response;
-                if (releatedBankService != null)
+                response = releatedBankService.ProcessPayment(paymentRequestDto, binInfo);
+                if (!response.PaymentStatus)
                 {
-                     response = releatedBankService.ProcessPayment(paymentRequestDto, binInfo);
-                    if (!response.PaymentStatus)
-                    {
-                        _loggerService.LogWarning($"Something went wrong. Running in the background. {response.PaymentStatus}");
-                        _producerService.SendMessage(paymentRequestDto);
-                    }
-                    else
-                    {
-                        _loggerService.LogInfo($"Payment is succesfull. Amount :{response.Amount}");
-                    }
-                   
-                    return response;
+                    _loggerService.LogWarning($"Something went wrong. Running in the background. {response.PaymentStatus}");
+                    _producerService.SendMessage(paymentRequestDto);
                 }
-                _loggerService.LogError("Could not found target Bank Service !");
-                throw new Exception("Could not found target Bank Service !");
+                else
+                {
+                    _loggerService.LogInfo($"Payment is succesfull. Amount :{response.Amount}");
+                }
+                return response;
             }
-            catch (Exception e)
+            else
             {
-                _loggerService.LogError($"Error occured when trying to reach {binInfo.BankName} ," +
-                    $" error message : {e.Message}");
-                throw;
-
+                throw new ReleatedBankServiceNotFoundException(bankName);
             }
-
         }
     }
 }
